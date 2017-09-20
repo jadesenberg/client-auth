@@ -1,4 +1,4 @@
-# Updated React Redux template
+# React-redux app for client side authentication
 
 Personal use only
 
