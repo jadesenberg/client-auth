@@ -1,6 +1,6 @@
 # React-redux app for client side authentication
 
-Personal use only
+Connected with the serverside authentication using expressjs
 
 ```
 > npm install
