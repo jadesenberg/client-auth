@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
 const API_URL = 'http://localhost:3090';
+const { AUTH_USER } = './types.js';
 
 export function signinUser({ email, password },history) {
     //redux thunk allows to return function instead of object
@@ -9,6 +9,7 @@ export function signinUser({ email, password },history) {
         axios.post(`${API_URL}/signin`, { email, password })
             .then(response => {
                 console.log("haha");
+                dispatch({ type: AUTH_USER });
                 history.push('/feature');
             })
             .catch(() => {
