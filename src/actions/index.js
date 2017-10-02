@@ -1,6 +1,6 @@
 import axios from 'axios';
 const API_URL = 'http://localhost:3090';
-const { AUTH_USER } = './types.js';
+import { AUTH_USER } from './types.js';
 
 export function signinUser({ email, password },history) {
     //redux thunk allows to return function instead of object
@@ -8,8 +8,11 @@ export function signinUser({ email, password },history) {
         console.log(email, password);
         axios.post(`${API_URL}/signin`, { email, password })
             .then(response => {
-                console.log("haha");
-                dispatch({ type: AUTH_USER });
+                
+                dispatch({ type: AUTH_USER }); // connect to reducer
+
+                localStorage.setItem('token', response.data.token); //save token to localstorage
+                
                 history.push('/feature');
             })
             .catch(() => {
