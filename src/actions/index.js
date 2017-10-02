@@ -16,6 +16,7 @@ export function signinUser({ email, password },history) {
                 history.push('/feature');
             })
             .catch(() => {
+                
                 dispatch(authError('Bad login info')); // auth error messaging
             });
     }
