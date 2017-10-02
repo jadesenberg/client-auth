@@ -1,6 +1,6 @@
 import axios from 'axios';
 const API_URL = 'http://localhost:3090';
-import { AUTH_USER } from './types.js';
+import { AUTH_USER, AUTH_ERROR } from './types.js';
 
 export function signinUser({ email, password },history) {
     //redux thunk allows to return function instead of object
@@ -16,7 +16,14 @@ export function signinUser({ email, password },history) {
                 history.push('/feature');
             })
             .catch(() => {
-
+                dispatch(authError('Bad login info')); // auth error messaging
             });
+    }
+}
+
+export function authError(error) {
+    return {
+        type: AUTH_ERROR,
+        payload: error
     }
 }
