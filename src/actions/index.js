@@ -1,6 +1,6 @@
 import axios from 'axios';
 const API_URL = 'http://localhost:3090';
-import { AUTH_USER, AUTH_ERROR } from './types.js';
+import { AUTH_USER, UNAUTH_USER, AUTH_ERROR } from './types.js';
 
 export function signinUser({ email, password },history) {
     //redux thunk allows to return function instead of object
@@ -27,4 +27,10 @@ export function authError(error) {
         type: AUTH_ERROR,
         payload: error
     }
+}
+
+export function signoutUser() {
+    
+    localStorage.removeItem('token');
+    return { type: UNAUTH_USER }
 }
