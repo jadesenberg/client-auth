@@ -17,7 +17,7 @@ class Signup extends Component {
                     <Field className="form-control" name="passwordConfirm" component="input" type="password"/>
                 </fieldset>
                 <br/>
-                <button action="submit" className="btn btn-primary">Sign Up</button>
+                <button action="submit" className="btn btn-primary">Sign Up!</button>
             </form>
         );
     }
