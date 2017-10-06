@@ -24,10 +24,20 @@ function validate(form){
 
     if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(form.email)) {
         errors.email = 'Invalid email address'
+    } else if(!form.email) {
+        errors.email = "Required field";
     }
     
     if(form.password !== form.passwordConfirm) {
         errors.passwordConfirm = "Password doesn't match";
+    }
+
+    if(!form.password) {
+        errors.password = 'Required field';
+    }
+
+    if(!form.passwordConfirm) {
+        errors.passwordConfirm = 'Required field';
     }
     
     return errors;
