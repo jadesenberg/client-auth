@@ -7,10 +7,13 @@ import reduxThunk from 'redux-thunk';
 
 import App from './components/app';
 import reducers from './reducers';
+
 import Signin from './components/auth/signin';
 import Signout from './components/auth/signout';
 import Signup from './components/auth/signup';
 import Header from './components/header';
+import RequireAuth from './components/auth/require_auth'; //higher order component
+import Feature from './components/auth/feature';
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 
@@ -22,6 +25,7 @@ ReactDOM.render(
         <Switch>
           <Route path="/signup" component={Signup} />
           <Route path="/signin" component={Signin} />
+          <Route path ="/feature" component={RequireAuth(Feature)} />
           <Route path="/signout" component={Signout} />
           <Route path="/" component={App} />
         </Switch>
