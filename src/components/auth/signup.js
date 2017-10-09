@@ -1,11 +1,23 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
+import { withRouter } from 'react-router-dom';
 import * as actions from '../../actions';
 import Textfield from '../common/textfield';
 
 class Signup extends Component {
     handleFormSubmit(formProps) {
-        this.props.signupUser(formProps);
+        this.props.signupUser(formProps, this.props.history);
+    }
+
+    renderErrorMessage() {
+        if(this.props.errorMessage) {
+            return (
+                <div className="alert alert-danger">
+                    <strong>Hey!!</strong> {this.props.errorMessage}
+                </div>
+            )
+        }
     }
 
     render() {
@@ -18,7 +30,7 @@ class Signup extends Component {
                     <Field name="password" component={Textfield} type="password" label="Password:"/>
                     <Field name="passwordConfirm" component={Textfield} type="password" label="Confirm Password:"/>
                 </fieldset>
-                <br/>
+                {this.renderErrorMessage()}
                 <button action="submit" className="btn btn-primary">Sign Up!</button>
             </form>
         );
@@ -49,9 +61,13 @@ function validate(form){
     return errors;
 }
 
+const mapStateToProps = state => {
+    return { errorMessage: state.auth.error };
+}
+
 const reduxFormSignup = reduxForm({
     form: 'signup',
     validate
-},null, actions)(Signup);
+})(Signup);
 
-export default reduxFormSignup;
+export default connect(mapStateToProps, actions)(withRouter(reduxFormSignup));
