@@ -5,7 +5,6 @@ import { AUTH_USER, UNAUTH_USER, AUTH_ERROR } from './types.js';
 export function signinUser({ email, password },history) {
     //redux thunk allows to return function instead of object
     return function(dispatch) { //way to connect to dispatch and reducers..
-        console.log(email, password);
         axios.post(`${API_URL}/signin`, { email, password })
             .then(response => {
                 
@@ -48,4 +47,15 @@ export function signoutUser() {
     
     localStorage.removeItem('token');
     return { type: UNAUTH_USER }
+}
+
+export function fetchMessage() {
+    return function(dispatch) {
+        axios.get(API_URL, {
+            headers: { authorization: localStorage.getItem('token') }
+        })
+            .then(response => {
+                console.log(response);
+            });
+    }
 }
