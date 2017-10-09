@@ -4,9 +4,15 @@ import * as actions from '../../actions';
 import Textfield from '../common/textfield';
 
 class Signup extends Component {
+    handleFormSubmit(formProps) {
+        this.props.signupUser(formProps);
+    }
+
     render() {
+        const { handleSubmit } = this.props;
+
         return (
-            <form>
+            <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
                 <fieldset>
                     <Field name="email" type="email" component={Textfield} label="Email:"/>
                     <Field name="password" component={Textfield} type="password" label="Password:"/>
@@ -46,6 +52,6 @@ function validate(form){
 const reduxFormSignup = reduxForm({
     form: 'signup',
     validate
-})(Signup);
+},null, actions)(Signup);
 
 export default reduxFormSignup;

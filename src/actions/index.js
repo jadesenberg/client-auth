@@ -22,6 +22,12 @@ export function signinUser({ email, password },history) {
     }
 }
 
+export function signupUser({ email, password }){
+    return function(dispatch) {
+        axios.post(`${API_URL}/signup`, {email, password})
+    }
+}
+
 export function authError(error) {
     return {
         type: AUTH_ERROR,
